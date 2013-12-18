@@ -1,0 +1,11 @@
+= form_for @registration, url: registration_path do |reg_form|
+
+  = fields_for @registration.guardian do |guardian|
+    = guardian.text_field :last_name
+    = guardian.text_field :first_name
+
+  = fields_for @registration.athlete do |athlete|
+    = athlete.text_field :last_name
+    = athlete.text_field :first_name
+
+  = reg_form.submit

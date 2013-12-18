@@ -27,13 +27,23 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    axiom-types (0.0.5)
+      descendants_tracker (~> 0.0.1)
+      ice_nine (~> 0.9)
+    backports (3.3.5)
     builder (3.1.4)
+    coercible (0.2.0)
+      backports (~> 3.0, >= 3.1.0)
+      descendants_tracker (~> 0.0.1)
+    descendants_tracker (0.0.3)
+    equalizer (0.0.8)
     erubis (2.7.0)
     haml (4.0.4)
       tilt
     hike (1.2.3)
     httpclient (2.3.4.1)
     i18n (0.6.9)
+    ice_nine (0.10.0)
     json (1.8.1)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -89,6 +99,11 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
+    virtus (1.0.0)
+      axiom-types (~> 0.0.5)
+      coercible (~> 0.2)
+      descendants_tracker (~> 0.0.1)
+      equalizer (~> 0.0.7)
 
 PLATFORMS
   ruby
@@ -98,3 +113,4 @@ DEPENDENCIES
   neography
   rails
   sass-rails
+  virtus

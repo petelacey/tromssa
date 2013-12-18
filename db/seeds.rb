@@ -15,9 +15,13 @@ end
 
 if Rails.env == 'development'
   exit if club_exists?('BBTS')
-  Neography::Node.create(
-    name: 'Waterville Valley Black & Blue Trail Smashers',
-    short_name: 'WVBBTS',
-    shorter_name: 'BBTS'
-  )
+  tx = NEO.begin_transaction
+    bbts = Neography::Node.create(
+      name: 'Waterville Valley Black & Blue Trail Smashers',
+      short_name: 'WVBBTS',
+      shorter_name: 'BBTS'
+    )
+    NEO.add_label(bbts, "Club")
+    NEO.create_schema_index("Club", "short_name")
+  NEO.commit_transaction(tx)
 end

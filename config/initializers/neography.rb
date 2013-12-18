@@ -13,3 +13,5 @@ Neography.configure do |config|
   config.password       = nil
   config.parser         = MultiJsonParser
 end
+
+NEO = Neography::Rest.new
