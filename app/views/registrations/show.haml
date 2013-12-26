@@ -1,6 +1,8 @@
-%h1 Guardian
-%dl
-  %dt Name:
-  %dd= @registration.guardian.last_name + ", " + @registration.guardian.first_name
-  %dt Name:
-  %dd= @registration.guardian.last_name + ", " + @registration.guardian.first_name
+%h1 Registration
+
+- if @registration
+  %dl
+    %dt Name:
+    %dd= @registration.guardian.last_name + ", " + @registration.guardian.first_name
+    %dt Name:
+    %dd= @registration.athlete.last_name + ", " + @registration.athlete.first_name

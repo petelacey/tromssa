@@ -22,6 +22,11 @@ if Rails.env == 'development'
       shorter_name: 'BBTS'
     )
     NEO.add_label(bbts, "Club")
-    NEO.create_schema_index("Club", "short_name")
   NEO.commit_transaction(tx)
+
+  tx = NEO.begin_transaction
+    user = Neography::Node.create(username: 'placey')
+    NEO.add_label(user, "User")
+  NEO.commit_transaction(tx)
+
 end
