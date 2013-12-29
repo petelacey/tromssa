@@ -55,8 +55,4 @@ class RegistrationService
     return nil if r.empty?
     Registration.new(r.first)
   end
-
-  def club
-    club = NEO.execute_query("MATCH (club:Club { short_name:'WVBBTS' }) RETURN club")["data"].first
-  end
 end
