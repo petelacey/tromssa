@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def current_club
     request.env[:current_club]
   end
+
+  before_action do
+    @current_club = current_club
+  end
 end

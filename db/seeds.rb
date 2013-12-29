@@ -6,27 +6,21 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-@neo = Neography::Rest.new
-
 def club_exists?(short_name)
-  bbts = @neo.execute_query("MATCH (bbts { shorter_name:'#{short_name}' }) RETURN bbts")
-  !bbts["data"].empty?
+  bbts = NEO.cypher("MATCH (bbts { shorter_name:'#{short_name}' }) RETURN bbts")
+  !bbts.empty?
 end
 
 if Rails.env == 'development'
   exit if club_exists?('BBTS')
-  tx = NEO.begin_transaction
-    bbts = Neography::Node.create(
-      name: 'Waterville Valley Black & Blue Trail Smashers',
-      short_name: 'WVBBTS',
-      shorter_name: 'BBTS'
-    )
-    NEO.add_label(bbts, "Club")
-  NEO.commit_transaction(tx)
-
-  tx = NEO.begin_transaction
-    user = Neography::Node.create(username: 'placey')
-    NEO.add_label(user, "User")
-  NEO.commit_transaction(tx)
-
+  bbts = NEO.cypher("
+    CREATE
+      (user:User { username: 'placey' })
+      -[:belongs_to]->
+      (club:Club {
+         name: 'Waterville Valley Black & Blue Trail Smashers',
+         short_name: 'WVBBTS',
+         shorter_name: 'BBTS' }
+      )
+  ")
 end

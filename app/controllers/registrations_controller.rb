@@ -2,11 +2,15 @@ class RegistrationsController < ApplicationController
   respond_to :html
 
   def show
-    @registration = reg_svc.retrieve(current_club, current_user)
+    @registration = get_registration(current_club, current_user)
   end
 
   def new
-    @registration = Registration.new(guardian: {}, athlete: {})
+    if get_registration(current_club, current_user)
+      redirect_to registration_path
+    else
+      @registration = Registration.new(guardian: {}, athlete: {})
+    end
   end
 
   def create
@@ -16,6 +20,10 @@ class RegistrationsController < ApplicationController
   end
 
   protected
+
+  def get_registration(club, user)
+    @registration = reg_svc.retrieve(current_club, current_user)
+  end
 
   def reg_svc
     @reg_svc ||= RegistrationService.new

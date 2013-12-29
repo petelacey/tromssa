@@ -1,11 +1,25 @@
+%h1
+  Register for
+  = @current_club.name
+
 = form_for @registration, url: registration_path do |reg_form|
 
-  = fields_for @registration.guardian do |guardian|
-    = guardian.text_field :last_name
-    = guardian.text_field :first_name
+  %fieldset
+    %legend
+      Tell us about yourself
+    = fields_for @registration.guardian do |guardian|
+      = guardian.label :last_name
+      = guardian.text_field :last_name
+      = guardian.label :first_name
+      = guardian.text_field :first_name
 
-  = fields_for @registration.athlete do |athlete|
-    = athlete.text_field :last_name
-    = athlete.text_field :first_name
+  %fieldset
+    %legend
+      Tell us about your athlete
+    = fields_for @registration.athlete do |athlete|
+      = athlete.label :last_name
+      = athlete.text_field :last_name
+      = athlete.label :first_name
+      = athlete.text_field :first_name
 
   = reg_form.submit

@@ -11,7 +11,7 @@ module Tromssa
        client.connect_timeout = 1
        client.send_timeout = 5
        client.receive_timeout = 30
-       #client.debug_dev = STDOUT
+       # client.debug_dev = STDOUT
     end
 
     def uri
@@ -19,8 +19,6 @@ module Tromssa
     end
 
     def cypher(query, params=nil)
-      body = { query: query }
-      body[:params] = params if params
       headers = { 'Content-Type' => JSON_MIME, 'Accept' => JSON_MIME }
 
       body = {
@@ -28,8 +26,9 @@ module Tromssa
           statement: query
         } ]
       }
-      resp = neo_client.post(uri, body.to_json, headers)
+      body[:statements][0][:parameters] = params if params
 
+      resp = neo_client.post(uri, body.to_json, headers)
       if resp.status_code == 200
         convert_response(JSON.parse(resp.body))
       else
