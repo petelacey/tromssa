@@ -1,55 +1,61 @@
-Neography.configure do |config|
-  config.protocol       = "http://"
-  config.server         = "localhost"
-  config.port           = 7474
-  config.directory      = ""  # prefix this path with '/' 
-  config.cypher_path    = "/cypher"
-  config.gremlin_path   = "/ext/GremlinPlugin/graphdb/execute_script"
-  config.log_file       = "neography.log"
-  config.log_enabled    = false
-  config.max_threads    = 20
-  config.authentication = nil  # 'basic' or 'digest'
-  config.username       = nil
-  config.password       = nil
-  config.parser         = MultiJsonParser
-end
+require 'httpclient/include_client'
 
-class Neography::Rest
-  
-  def tromssa_query(query)
-    resp = execute_query(query)
-    return convert_response(resp)
-  end
+module Tromssa
+  class Neo
+    extend HTTPClient::IncludeClient
 
-  def convert_response(resp)
-    return [] if resp["data"].empty?
+    JSON_MIME = 'application/json'
 
-    rows = resp["data"]
-    columns = resp["columns"]
-    converted_rows = []
-
-    template = Hash.new { |h, k| h[k] = [] }
-    columns.each do |col|
-      node, attr = col.split(".")
-      template[node] << attr
+    include_http_client(:method_name => :neo_client) do |client|
+       client.set_cookie_store(nil)
+       client.connect_timeout = 1
+       client.send_timeout = 5
+       client.receive_timeout = 30
+       #client.debug_dev = STDOUT
     end
 
-    rows.each do |row|
-      converted_row = {}
-      i = 0
-      template.keys.each do |node|
-        data = {}
-        template[node].each do |label|
-          data[label.to_sym] = row[i]
-          i = i+1
-        end
-        converted_row[node.to_sym] = data
+    def uri
+      "http://localhost:7474/db/data/transaction/commit"
+    end
+
+    def cypher(query, params=nil)
+      body = { query: query }
+      body[:params] = params if params
+      headers = { 'Content-Type' => JSON_MIME, 'Accept' => JSON_MIME }
+
+      body = {
+        statements: [ {
+          statement: query
+        } ]
+      }
+      resp = neo_client.post(uri, body.to_json, headers)
+
+      if resp.status_code == 200
+        convert_response(JSON.parse(resp.body))
+      else
+        # Do appropriate thing
       end
-      converted_rows << converted_row
     end
-    converted_rows
+
+    private
+
+    def convert_response(resp)
+      resp = resp["results"].first
+      return [] if resp["data"].empty?
+
+      columns = resp["columns"]
+      rows    = resp["data"]
+
+      rows.map do |row|
+        new_row = {}
+        row["row"].each_with_index do |elem, i|
+          new_row[columns[i]] = elem
+        end
+        new_row.with_indifferent_access
+      end
+    end
+
   end
 end
 
-NEO = Neography::Rest.new
-
+NEO = Tromssa::Neo.new

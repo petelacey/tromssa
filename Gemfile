@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails'
-gem 'neography'
+gem 'httpclient'
 gem 'sass-rails'
 gem 'haml'
 gem 'virtus'

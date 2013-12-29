@@ -1,4 +1,5 @@
 Tromssa::Application.routes.draw do
+  root 'root#index'
   resource :registration
 
   # The priority is based upon order of creation: first created -> highest priority.

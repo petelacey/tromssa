@@ -2,7 +2,7 @@ class RegistrationsController < ApplicationController
   respond_to :html
 
   def show
-    @registration = reg_svc.retrieve(current_user)
+    @registration = reg_svc.retrieve(current_club, current_user)
   end
 
   def new
@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
 
   def create
     registration = Registration.new(params)
-    @registration = reg_svc.register(registration, current_user)
+    @registration = reg_svc.register(registration, current_club, current_user)
     respond_with(@registration, location: registration_path)
   end
 

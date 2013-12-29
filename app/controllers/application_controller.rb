@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def current_user
     request.env[:current_user]
   end
+
+  def current_club
+    request.env[:current_club]
+  end
 end
