@@ -1,25 +1,29 @@
-%h1
-  Register for
-  = @current_club.name
+%h3 Register
 
-= form_for @registration, url: registration_path do |reg_form|
+= form_for @registration, url: registration_path, html: {class: 'uk-form'} do |reg_form|
 
   %fieldset
     %legend
       Tell us about yourself
     = fields_for @registration.guardian do |guardian|
-      = guardian.label :last_name
-      = guardian.text_field :last_name
-      = guardian.label :first_name
-      = guardian.text_field :first_name
+      %div.row
+        %div.small-6.columns
+          = guardian.label :last_name
+          = guardian.text_field :last_name
+        %div.small-6.columns
+          = guardian.label :first_name
+          = guardian.text_field :first_name
 
   %fieldset
     %legend
       Tell us about your athlete
     = fields_for @registration.athlete do |athlete|
-      = athlete.label :last_name
-      = athlete.text_field :last_name
-      = athlete.label :first_name
-      = athlete.text_field :first_name
+      %div.row
+        %div.small-6.columns
+          = athlete.label :last_name
+          = athlete.text_field :last_name
+        %div.small-6.columns
+          = athlete.label :first_name
+          = athlete.text_field :first_name
 
-  = reg_form.submit
+  = reg_form.submit("Register", class: 'button right')

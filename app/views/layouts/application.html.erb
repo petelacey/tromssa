@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Tromssa</title>
-  <%# Commented out until I want JS and CSS %>
-  <%# <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%# <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%= yield %>
-</body>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div class='row'>
+      <div class="small-1 column">  
+        <%= image_tag(@current_club.logo_path, class: 'logo') %>
+      </div>
+      <div class="small-11 columns">  
+        <h2>
+          <%= @current_club.name %>
+        </h2>
+      </div>
+      <div class="small-12 columns">  
+        <%= yield %>
+      </div>
+    </div>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

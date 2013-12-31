@@ -20,7 +20,8 @@ if Rails.env == 'development'
       (club:Club {
          name: 'Waterville Valley Black & Blue Trail Smashers',
          short_name: 'WVBBTS',
-         shorter_name: 'BBTS' }
+         shorter_name: 'BBTS',
+         logo_path: 'uploads/bbts/logo.jpg'}
       )
   ")
 end
