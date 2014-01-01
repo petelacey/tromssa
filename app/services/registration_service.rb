@@ -1,6 +1,6 @@
 class RegistrationService
   def register(reg, club, user)
-    if not reg.guardian.valid? and reg.athlete.valid?
+    if not (reg.guardian.valid? and reg.athlete.valid?)
       reg.errors[:base] = "Errors exist"
       return reg
     end
@@ -18,7 +18,8 @@ class RegistrationService
       CREATE
         (a:Athlete {
           last_name: {athlete_last_name},
-          first_name: {athlete_first_name}
+          first_name: {athlete_first_name},
+          dob: {athlete_dob}
         })
         -[:member]->(club)
       CREATE (g)-[:guardian]->(a)"
@@ -29,7 +30,8 @@ class RegistrationService
       guardian_last_name: reg.guardian.last_name,
       guardian_first_name: reg.guardian.first_name,
       athlete_last_name: reg.athlete.last_name,
-      athlete_first_name: reg.athlete.first_name
+      athlete_first_name: reg.athlete.first_name,
+      athlete_dob: reg.athlete.dob
     }
 
     NEO.cypher(query, params)

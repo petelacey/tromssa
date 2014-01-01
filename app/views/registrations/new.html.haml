@@ -15,7 +15,8 @@
       Tell us about your athlete
     = simple_fields_for @registration.athlete do |athlete|
       %div.row
-        = athlete.input :last_name, wrapper_html: { class: 'small-6 columns' }
-        = athlete.input :first_name, wrapper_html: { class: 'small-6 columns' }
+        = athlete.input :last_name, wrapper_html: { class: 'small-4 columns' }
+        = athlete.input :first_name, wrapper_html: { class: 'small-4 columns' }
+        = athlete.input :dob, placeholder: 'mm/dd/yyyy', label: 'Birthday', wrapper_html: { class: 'small-4 columns' }
 
   = reg_form.submit("Register", class: 'button right')

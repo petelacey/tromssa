@@ -2,17 +2,19 @@
   Registration Information
 
 - if @registration
-  %h2
+  %h3.subheader
     Guardian
   %dl
     %dt Name:
     %dd= @registration.guardian.last_name + ", " + @registration.guardian.first_name
 
-  %h2
+  %h3.subheader
     Athlete
   %dl
     %dt Name:
     %dd= @registration.athlete.last_name + ", " + @registration.athlete.first_name
+    %dt Birthday:
+    %dd= @registration.athlete.dob
 
 - else
   %p
