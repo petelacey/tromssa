@@ -1,29 +1,21 @@
 %h3 Register
 
-= form_for @registration, url: registration_path, html: {class: 'uk-form'} do |reg_form|
+= simple_form_for @registration, url: registration_path do |reg_form|
 
   %fieldset
     %legend
       Tell us about yourself
-    = fields_for @registration.guardian do |guardian|
+    = simple_fields_for @registration.guardian do |guardian|
       %div.row
-        %div.small-6.columns
-          = guardian.label :last_name
-          = guardian.text_field :last_name
-        %div.small-6.columns
-          = guardian.label :first_name
-          = guardian.text_field :first_name
+        = guardian.input :last_name, wrapper_html: { class: 'small-6 columns' }
+        = guardian.input :first_name, wrapper_html: { class: 'small-6 columns' }
 
   %fieldset
     %legend
       Tell us about your athlete
-    = fields_for @registration.athlete do |athlete|
+    = simple_fields_for @registration.athlete do |athlete|
       %div.row
-        %div.small-6.columns
-          = athlete.label :last_name
-          = athlete.text_field :last_name
-        %div.small-6.columns
-          = athlete.label :first_name
-          = athlete.text_field :first_name
+        = athlete.input :last_name, wrapper_html: { class: 'small-6 columns' }
+        = athlete.input :first_name, wrapper_html: { class: 'small-6 columns' }
 
   = reg_form.submit("Register", class: 'button right')

@@ -1,5 +1,10 @@
 class RegistrationService
   def register(reg, club, user)
+    if not reg.guardian.valid? and reg.athlete.valid?
+      reg.errors[:base] = "Errors exist"
+      return reg
+    end
+
     query = "
       MATCH
         (club:Club { short_name: {club_short_name} }), (u:User { username: {username} })
