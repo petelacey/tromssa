@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
   respond_to :html
+  decorates_assigned :registration
 
   def show
     @registration = get_registration(current_club, current_user)
@@ -16,7 +17,7 @@ class RegistrationsController < ApplicationController
   def create
     registration = Registration.new(params)
     @registration = reg_svc.register(registration, current_club, current_user)
-    respond_with(@registration, location: registration_path)
+    respond_with(registration, location: registration_path)
   end
 
   protected

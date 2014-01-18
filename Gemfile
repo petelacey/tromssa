@@ -5,6 +5,7 @@ gem 'sass-rails'
 gem 'haml'
 gem 'virtus'
 gem 'simple_form'
+gem 'draper'
 
 gem 'sass-rails'
 gem 'uglifier'

@@ -1,5 +1,6 @@
 class RootController < ApplicationController
   respond_to :html
+  decorates_assigned :registration
 
   def index
     @registration = reg_svc.retrieve(current_club, current_user)

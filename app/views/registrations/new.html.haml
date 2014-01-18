@@ -1,11 +1,11 @@
 %h3 Register
 
-= simple_form_for @registration, url: registration_path do |reg_form|
+= simple_form_for registration, url: registration_path do |reg_form|
 
   %fieldset
     %legend
       Tell us about yourself
-    = simple_fields_for @registration.guardian do |guardian|
+    = simple_fields_for registration.guardian do |guardian|
       %div.row
         = guardian.input :last_name, wrapper_html: { class: 'small-6 columns' }
         = guardian.input :first_name, wrapper_html: { class: 'small-6 columns' }
@@ -13,7 +13,7 @@
   %fieldset
     %legend
       Tell us about your athlete
-    = simple_fields_for @registration.athlete do |athlete|
+    = simple_fields_for registration.athlete do |athlete|
       %div.row
         = athlete.input :last_name, wrapper_html: { class: 'small-4 columns' }
         = athlete.input :first_name, wrapper_html: { class: 'small-4 columns' }
