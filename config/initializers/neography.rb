@@ -11,7 +11,7 @@ module Tromssa
        client.connect_timeout = 1
        client.send_timeout = 5
        client.receive_timeout = 30
-       # client.debug_dev = STDOUT
+       client.debug_dev = STDOUT
     end
 
     def uri
