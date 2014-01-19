@@ -15,8 +15,19 @@
       Tell us about your athlete
     = simple_fields_for registration.athlete do |athlete|
       %div.row
+        =# TODO: Do a dynamic lookup using USSA API
+        = athlete.input :ussa_id, label: 'USSA ID', wrapper_html: { class: 'small-4 columns' }
+      %hr
+      %div.row
+        =# TODO: Disable until API call completes and populate if possible
         = athlete.input :last_name, wrapper_html: { class: 'small-4 columns' }
         = athlete.input :first_name, wrapper_html: { class: 'small-4 columns' }
-        = athlete.input :dob, placeholder: 'mm/dd/yyyy', label: 'Birthday', wrapper_html: { class: 'small-4 columns' }
+        = athlete.input :dob, placeholder: 'YYYY-MM-DD', label: 'Birthday', wrapper_html: { class: 'small-4 columns' }
+      %hr
+      %div.row
+        =# TODO: Enable only after birthday input. Ajax to limit registraion.sports only to those available by age.
+        = athlete.input :sport, as: :sport_select, :collection => registration.sports, label: 'Sport:', wrapper_html: { class: 'small-4 columns' }
+
+        =# TODO: Rest of form. Next, show program offerings based on age.
 
   = reg_form.submit("Register", class: 'button right')

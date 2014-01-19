@@ -5,6 +5,7 @@ class RegistrationService
       return reg
     end
 
+    #TODO: Move query to DB API
     query = "
       MATCH
         (club:Club { short_name: {club_short_name} }), (u:User { username: {username} })
