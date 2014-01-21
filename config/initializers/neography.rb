@@ -1,3 +1,6 @@
+# TODO: Move to better named file
+#
+# TODO: Beef up
 require 'httpclient/include_client'
 
 module Tromssa
