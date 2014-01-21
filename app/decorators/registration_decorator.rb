@@ -13,26 +13,9 @@ class RegistrationDecorator < Draper::Decorator
   #   end
 
   def sports
-    # TODO: Move this query to a Service (and to a DB API)
-    # TODO: Make this query sensitive to athlete's birthday
-    query = "
-      MATCH
-        (club:Club)-[:active_during]->(season:Season)-[:offering]->(Porgram)-[:trains_for]->(sport:Sport)
-      WHERE
-        club.short_name = {club_short_name}
-      AND
-        season.start_date >= {start_date}
-      RETURN
-        DISTINCT sport"
-
-        p h.class.methods
-    params = {club_short_name: h.current_club.short_name,
-              start_date: "2013-00-00"} # TODO: Make dynamic
-
-    sports = NEO.cypher(query, params)
-
+    sports = ClubService.new(h.current_club).get_sports
+  
     # TODO: Consider instantiating an object instead
     sports.map { |sport| s = sport["sport"]["name"]; [s, s] }
-
   end
 end
