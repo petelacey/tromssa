@@ -57,7 +57,7 @@ if Rails.env == 'development'
       (season)-[:offering]->
       (mites:Program {
         name: 'Mitey Mites',
-        age_group: '[5, 9]',
+        age_group: [5, 9],
         conditions: '',
         description: 'Introductory race training for the young ones.' }
       )
@@ -72,7 +72,7 @@ if Rails.env == 'development'
       (season)-[:offering]->
       (u10:Program {
         name: 'U10 Program',
-        age_group: '[5, 9]',
+        age_group: [5, 9],
         conditions: 'Coach recommnendation Required',
         description: 'Competive race training.' }
       )
@@ -86,7 +86,7 @@ if Rails.env == 'development'
       (season)-[:offering]->
       (u12:Program {
         name: 'U12 Program',
-        age_group: '[10, 11]',
+        age_group: [10, 11],
         conditions: '',
         description: 'Competive race training.' }
       )
@@ -100,7 +100,7 @@ if Rails.env == 'development'
       (season)-[:offering]->
       (freegroms:Program {
         name: 'Freestyle Groms Program',
-        age_group: '[8, 9]',
+        age_group: [8, 9],
         conditions: '',
         description: 'Lorem ibsom.' }
       )
@@ -114,7 +114,7 @@ if Rails.env == 'development'
       (season)-[:offering]->
       (groms:Program {
         name: 'Groms Program',
-        age_group: '[5, 9]',
+        age_group: [5, 9],
         conditions: '',
         description: 'Lorem ibsom.' }
       )

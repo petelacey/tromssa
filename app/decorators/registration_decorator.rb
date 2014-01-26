@@ -12,10 +12,4 @@ class RegistrationDecorator < Draper::Decorator
   #     end
   #   end
 
-  def sports
-    sports = ClubService.new(h.storage_engine, h.current_club).get_sports
-  
-    # TODO: Consider instantiating an object instead
-    sports.map { |sport| s = sport["sport"]["name"]; [s, s] }
-  end
 end

@@ -26,6 +26,7 @@
       %hr
       %div.row
         =# TODO: Enable only after birthday input. Ajax to limit registraion.sports only to those available by age.
+        =# HERE: registration.sports does not exist anymore, change to use registration.js
         = athlete.input :sport, as: :sport_select, :collection => registration.sports, label: 'Sport:', wrapper_html: { class: 'small-4 columns' }
 
         =# TODO: Rest of form. Next, show program offerings based on age.

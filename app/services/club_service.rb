@@ -6,7 +6,15 @@ class ClubService
     @club = club
   end
 
-  def get_sports
-    storage.sports_available(@club)
+  def get_sports(birth_date)
+    dob = Date.parse(birth_date)
+    storage.sports_available(@club, age(dob))
+  end
+
+  private
+
+  def age(dob)
+    now = Time.now.utc.to_date
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 end
