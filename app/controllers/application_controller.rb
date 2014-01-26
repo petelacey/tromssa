@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_club
+  helper_method :storage_engine
 
   def current_user
     request.env[:current_user]
@@ -16,5 +17,16 @@ class ApplicationController < ActionController::Base
 
   before_action do
     @current_club = current_club
+  end
+
+  def storage_engine
+    case Rails.env
+    when "development"
+      Tromssa::Storage::NeoStore.new
+    when "test"
+      Tromssa::Storage::NeoStore.new
+    when "production"
+      Tromssa::Storage::NeoStore.new
+    end
   end
 end

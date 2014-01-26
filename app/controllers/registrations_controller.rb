@@ -27,6 +27,6 @@ class RegistrationsController < ApplicationController
   end
 
   def reg_svc
-    @reg_svc ||= RegistrationService.new
+    @reg_svc ||= RegistrationService.new(storage_engine)
   end
 end

@@ -12,7 +12,7 @@ class RootController < ApplicationController
   protected
 
   def reg_svc
-    @reg_svc ||= RegistrationService.new
+    @reg_svc ||= RegistrationService.new(storage_engine)
   end
 
 end

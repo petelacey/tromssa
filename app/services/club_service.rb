@@ -1,11 +1,12 @@
-# TODO: Inject storage class
-
 class ClubService
-  def initialize(club)
+  attr_accessor :storage
+
+  def initialize(storage, club)
+    @storage = storage.club
     @club = club
   end
 
   def get_sports
-    Tromssa::Storage::Neo::Club.new.sports_available(@club)
+    storage.sports_available(@club)
   end
 end

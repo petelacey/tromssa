@@ -1,16 +1,20 @@
-# TODO: Inject storage class
-
 class RegistrationService
+  attr_accessor :storage
+
+  def initialize(storage)
+    @storage = storage.registration
+  end
+
   def register(reg, club, user)
     if not (reg.guardian.valid? and reg.athlete.valid?)
       reg.errors[:base] = "Errors exist"
       return reg
     end
-    Tromssa::Storage::Neo::Registration.new.create(reg, club, user)
+    storage.create(reg, club, user)
   end
 
   def retrieve(club, user)
-    r = Tromssa::Storage::Neo::Registration.new.retrieve(club, user)
+    r = storage.retrieve(club, user)
     return nil if r.empty?
     Registration.new(r.first)
   end
