@@ -2,29 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : 'Tromssa' %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <div class='row'>
-      <div class="small-1 column">  
-        <%= image_tag(@current_club.logo_path, class: 'logo') %>
-      </div>
-      <div class="small-11 columns">  
-        <h1>
-          <%= @current_club.name %>
-        </h1>
-      </div>
-      <div class="small-12 columns">  
-        <%= yield %>
-      </div>
-    </div>
+    <%= image_tag(@current_club.logo_path, class: 'logo') %>
+    <h1>
+      <%= @current_club.name %>
+    </h1>
+    <%= yield %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

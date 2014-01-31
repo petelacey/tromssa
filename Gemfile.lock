@@ -49,9 +49,6 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.0.2)
-    foundation-rails (5.0.2.0)
-      railties (>= 3.1.0)
-      sass (>= 3.2.0)
     haml (4.0.4)
       tilt
     hike (1.2.3)
@@ -127,7 +124,6 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails
   draper
-  foundation-rails
   haml
   httpclient
   jquery-rails
