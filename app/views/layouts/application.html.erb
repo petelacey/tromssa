@@ -12,11 +12,21 @@
   </head>
 
   <body>
-    <%= image_tag(@current_club.logo_path, class: 'logo') %>
-    <h1>
-      <%= @current_club.name %>
-    </h1>
-    <%= yield %>
+    <div class='container-fluid'>
+      <div class='row hidden-xs banner'>
+        <div class='col-xs-1 hidden-sm'>
+          <%= image_tag(@current_club.logo_path, class: 'img-responsive', height: '100%') %>
+        </div>
+        <div class='col-xs-11'>
+          <h2>
+            <%= @current_club.name %>
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class='container'>
+      <%= yield %>
+    </div>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

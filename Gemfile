@@ -4,7 +4,7 @@ gem 'httpclient'
 gem 'sass-rails'
 gem 'haml'
 gem 'virtus'
-gem 'simple_form'
+gem 'bootstrap_form'
 gem 'draper'
 
 gem 'sass-rails'

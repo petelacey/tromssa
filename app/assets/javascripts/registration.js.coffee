@@ -14,7 +14,7 @@ Registration =
     $.getJSON("/sports", "birth_date=" + dob, Registration.populateSports)
 
 $(document).ready ->
-  $("#athlete_dob").change(-> Registration.getSports($(this).val()))
+  $("#registration_athlete_dob").change(-> Registration.getSports($(this).val()))
 
-  if ! $.trim($("#athlete_dob").val())
+  if ! $.trim($("#registration_athlete_dob").val())
     $("select[name='sport']").attr("disabled", "disabled")

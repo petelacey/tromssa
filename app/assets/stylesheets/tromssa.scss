@@ -1,7 +1,19 @@
-h1, h2, h3, h4, h5, h6 {
-  color: blue;
-}
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap_config";
 
-img.logo {
-  margin-top: .5em;
+.banner
+  {
+    img {
+      margin-top: .5em;
+      @include square(70px);
+    }
+
+    h1 {
+      color: $tromssa-text-color;
+  }
+  
+  background-color: white;
+  padding-bottom: 5px;
+  margin-bottom: 1em;
 }
