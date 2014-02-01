@@ -2,33 +2,34 @@
 
 = simple_form_for registration, url: registration_path do |reg_form|
 
-  %fieldset
-    %legend
-      Tell us about yourself
-    = simple_fields_for registration.guardian do |guardian|
-      %div.row
-        = guardian.input :last_name, wrapper_html: { class: 'small-6 columns' }
-        = guardian.input :first_name, wrapper_html: { class: 'small-6 columns' }
+  %div.container
+    %fieldset
+      %legend
+        Tell us about yourself
+      = simple_fields_for registration.guardian do |guardian|
+        %div.row
+          = guardian.input :last_name, wrapper_html: { class: 'form-group col-xs-6' }
+          = guardian.input :first_name, wrapper_html: { class: 'form-group col-xs-6' }
 
-  %fieldset
-    %legend
-      Tell us about your athlete
-    = simple_fields_for registration.athlete do |athlete|
-      %div.row
-        =# TODO: Do a dynamic lookup using USSA API
-        = athlete.input :ussa_id, label: 'USSA ID', wrapper_html: { class: 'small-4 columns' }
-      %hr
-      %div.row
-        =# TODO: Disable until API call completes and populate if possible
-        = athlete.input :last_name, wrapper_html: { class: 'small-4 columns' }
-        = athlete.input :first_name, wrapper_html: { class: 'small-4 columns' }
-        = athlete.input :dob, placeholder: 'YYYY-MM-DD', label: 'Birthday', wrapper_html: { class: 'small-4 columns' }
-      %hr
-      %div.row
-        =# TODO: Enable only after birthday input. Ajax to limit registraion.sports only to those available by age.
-        =# HERE: registration.sports does not exist anymore, change to use registration.js
-        = athlete.input :sport, as: :sport_select, :collection => registration.sports, label: 'Sport:', wrapper_html: { class: 'small-4 columns' }
+    %fieldset
+      %legend
+        Tell us about your athlete
+      = simple_fields_for registration.athlete do |athlete|
+        %div.row
+          =# TODO: Do a dynamic lookup using USSA API
+          = athlete.input :ussa_id, label: 'USSA ID', wrapper_html: { class: 'form-group col-xs-4' }
+        %hr
+        %div.row
+          =# TODO: Disable until API call completes and populate if possible
+          = athlete.input :last_name, wrapper_html: { class: 'form-group col-xs-4' }
+          = athlete.input :first_name, wrapper_html: { class: 'form-group col-xs-4' }
+          = athlete.input :dob, placeholder: 'YYYY-MM-DD', label: 'Birthday', wrapper_html: { class: 'form-group col-xs-4' }
+        %hr
+        %div.row
+          =# TODO: Enable only after birthday input. Ajax to limit registraion.sports only to those available by age.
+          =# HERE: registration.sports does not exist anymore, change to use registration.js
+          = athlete.input :sport, as: :sport_select, :collection => [], label: 'Sport:', wrapper_html: { class: 'form-group col-xs-4' }
 
-        =# TODO: Rest of form. Next, show program offerings based on age.
+          =# TODO: Rest of form. Next, show program offerings based on age.
 
-  = reg_form.submit("Register", class: 'button right')
+    = reg_form.submit("Register", class: 'btn-primary')
