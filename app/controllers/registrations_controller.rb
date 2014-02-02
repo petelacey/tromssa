@@ -15,7 +15,7 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    registration = Registration.new(params)
+    registration = Registration.new(params[:registration])
     @registration = reg_svc.register(registration, current_club, current_user)
     respond_with(registration, location: registration_path)
   end

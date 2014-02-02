@@ -14,6 +14,16 @@ Registration =
     $.getJSON("/sports", "birth_date=" + dob, Registration.populateSports)
 
 $(document).ready ->
+  $("#new_registration").attr("novalidate","novalidate").parsley(
+    successClass: 'has-success',
+    errorClass: 'has-error',
+    errors: {
+      classHandler: (el) ->
+        return jQuery(el).closest('.form-group')
+      , errorsWrapper: '<span></span>'
+      , errorElem: '<span></span>'
+    }
+  )
   $("#registration_athlete_dob").change(-> Registration.getSports($(this).val()))
 
   if ! $.trim($("#registration_athlete_dob").val())

@@ -6,9 +6,9 @@
     = reg_form.fields_for registration.guardian do |guardian|
       .row
         .col-xs-6
-          = guardian.text_field :last_name
+          = guardian.text_field :last_name, required: true
         .col-xs-6
-          = guardian.text_field :first_name
+          = guardian.text_field :first_name, required: true
 
   %fieldset
     %legend
@@ -21,11 +21,11 @@
       =# TODO: Disable until API call completes and populate if possible
       .row
         .col-xs-4
-          = athlete.text_field :last_name
+          = athlete.text_field :last_name, required: true
         .col-xs-4
-          = athlete.text_field :first_name
+          = athlete.text_field :first_name, required: true
         .col-xs-4
-          = athlete.text_field :dob, placeholder: 'YYYY-MM-DD', label: 'Birthday'
+          = athlete.text_field :dob, placeholder: 'YYYY-MM-DD', type: 'date', label: 'Birthday', required: true
       =# TODO: Enable only after birthday input. Ajax to limit registraion.sports only to those available by age.
       =# HERE: registration.sports does not exist anymore, change to use registration.js
       .row
