@@ -20,8 +20,6 @@ $(document).ready ->
     errors: {
       classHandler: (el) ->
         return jQuery(el).closest('.form-group')
-      , errorsWrapper: '<span></span>'
-      , errorElem: '<span></span>'
     }
   )
   $("#registration_athlete_dob").change(-> Registration.getSports($(this).val()))

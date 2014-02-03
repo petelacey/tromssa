@@ -25,7 +25,7 @@
         .col-xs-4
           = athlete.text_field :first_name, required: true
         .col-xs-4
-          = athlete.text_field :dob, placeholder: 'YYYY-MM-DD', type: 'date', label: 'Birthday', required: true
+          = athlete.text_field :dob, placeholder: 'YYYY-MM-DD', type: 'date', label: 'Birthday', required: true, "parsley-type" => 'dateIso' 
       =# TODO: Enable only after birthday input. Ajax to limit registraion.sports only to those available by age.
       =# HERE: registration.sports does not exist anymore, change to use registration.js
       .row
