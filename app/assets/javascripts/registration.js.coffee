@@ -11,7 +11,10 @@ Registration =
     $("select[name='sport']").attr("disabled", false)
 
   getSports: (dob) ->
-    $.getJSON("/sports", "birth_date=" + dob, Registration.populateSports)
+    if $("#registration_athlete_dob").parsley('validate')
+      $.getJSON("/sports", "birth_date=" + dob, Registration.populateSports)
+    else
+      $("select[name='sport']").attr("disabled", "disabled")
 
 $(document).ready ->
   $("#new_registration").attr("novalidate","novalidate").parsley(
