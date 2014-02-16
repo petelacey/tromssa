@@ -2,7 +2,7 @@ module Tromssa
   module Storage
     module Neo
       class Club
-        def sports_available(club, age)
+        def programs_available(club, age)
           query = "
             MATCH
               (club:Club)-[:active_during]->(season:Season)-[:offering]->(program:Program)-[:trains_for]->(sport:Sport)
@@ -15,7 +15,9 @@ module Tromssa
             AND
               {athlete_age} <= program.age_group[1]
             RETURN
-              DISTINCT sport"
+              DISTINCT sport.name, program.name, program.description
+            ORDER BY
+              sport.name"
 
           params = {club_short_name: club.short_name,
                     athlete_age: age,

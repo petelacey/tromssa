@@ -6,9 +6,9 @@ class ClubService
     @club = club
   end
 
-  def get_sports(birth_date)
+  def get_programs(birth_date)
     dob = Date.parse(birth_date)
-    storage.sports_available(@club, age(dob))
+    storage.programs_available(@club, age(dob))
   end
 
   private

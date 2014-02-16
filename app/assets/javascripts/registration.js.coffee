@@ -3,18 +3,28 @@
 # Style disable field
 
 Registration = 
-  populateSports: (sports) ->
-    options = "<option></option>"
-    for sport in sports
-      options += '<option value="' + sport[0] + '">' + sport[1] + '</option>'
-    $("select[name='sport']").find('option').remove().end().append($(options))
-    $("select[name='sport']").attr("disabled", false)
+  populatePrograms: (programs) ->
+    options = ""
+    for sport, descriptions of programs
+      console.log(sport)
+      console.log(descriptions)
+      options += '<optgroup label="' + sport + '">'
+      for value, desc of descriptions
+        options += '<option value="' + value + '">' + desc + '</option>'
 
-  getSports: (dob) ->
-    if $("#registration_athlete_dob").parsley('validate')
-      $.getJSON("/sports", "birth_date=" + dob, Registration.populateSports)
+    program_element = $("select[name='program']")
+    program_element.find('optgroup').remove().end().append($(options))
+
+    if options == ""
+      program_element.attr("disabled", true)
     else
-      $("select[name='sport']").attr("disabled", "disabled")
+      program_element.attr("disabled", false)
+
+  getPrograms: (dob) ->
+    if $("#registration_athlete_dob").parsley('validate')
+      $.getJSON("/programs", "birth_date=" + dob, Registration.populatePrograms)
+    else
+      $("select[name='program']").attr("disabled", "disabled")
 
 $(document).ready ->
   $("#new_registration").attr("novalidate","novalidate").parsley(
@@ -25,7 +35,7 @@ $(document).ready ->
         return jQuery(el).closest('.form-group')
     }
   )
-  $("#registration_athlete_dob").change(-> Registration.getSports($(this).val()))
+  $("#registration_athlete_dob").change(-> Registration.getPrograms($(this).val()))
 
   if ! $.trim($("#registration_athlete_dob").val())
-    $("select[name='sport']").attr("disabled", "disabled")
+    $("select[name='program']").attr("disabled", "disabled")
